@@ -377,6 +377,15 @@ namespace drawerbase {
 			return false;
 		}
 
+    std::string textbox::text() const {
+      internal_scope_guard lock;
+      auto editor = get_drawer_trigger().editor();
+      if (editor) {
+        return to_utf8(editor->text());
+      }
+      return std::string();
+    }
+
 		std::optional<std::string> textbox::getline(std::size_t pos) const
 		{
 			auto result = std::string{};
